@@ -1,0 +1,29 @@
+.incident-item {
+    display: flex;
+    margin-bottom: 7px;
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+.incident-date {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.incident-img {
+    width: 30%;
+}
+
+.incident-detail {
+    width: 70%;
+    padding-left: 6px;
+}
+
+.incident-title {
+    font-size: 11px;
+}
+
+.incident-desc {
+    font-size: 10px;
+}
