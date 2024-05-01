@@ -12,8 +12,7 @@ const App = () => {
   const [mqttClient, setMqttClient] = React.useState();
   const [zones, setZones] = React.useState([
     { topic: "Zone_1", location: "Location 1" },
-    { topic: "Zone_1", location: "Location 2" },
-    { topic: "Zone_1", location: "Location 3" },
+    { topic: "Zone_2", location: "Location 2" },
   ]);
 
   const [selectedZone, setSelectedZone] = React.useState(null);
@@ -45,10 +44,10 @@ const App = () => {
     setZones(zones.filter((zone) => zone.topic !== topic));
   };
 
- const handleUpdateClick = (zone) => {
-   setSelectedZone(zone);
-   handleupdateOpen();
- };
+  const handleUpdateClick = (zone) => {
+    setSelectedZone(zone);
+    handleupdateOpen();
+  };
 
   const handleUpdate = (updatedZone) => {
     const index = zones.findIndex((zone) => zone.topic === updatedZone.topic);
@@ -63,33 +62,6 @@ const App = () => {
     const client = getMQTTClient({ host: "ws://localhost:9001" });
     setMqttClient(client);
   }, []);
-
-  const incidents = [
-    {
-      location: "Site location - 2",
-      time: "12: 30",
-      title: "VAST",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore",
-      img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-    },
-    {
-      location: "Site location - 4",
-      time: "09: 30",
-      title: "BNND",
-      description:
-        "Sajdg ASJDB , consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-    },
-    {
-      location: "Site location - 6",
-      time: "06: 30",
-      title: "BNNDeee",
-      description:
-        "Sajdg ASJDB , consetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      img: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-    },
-  ];
 
   return (
     <div
@@ -125,7 +97,7 @@ const App = () => {
           </Button>
         </Grid>
       </Grid>
-      <Sidebar incidents={incidents} />
+      <Sidebar mqttClient={mqttClient} />
       <AddCamModal
         open={openAddModal}
         handleClose={handleClose}
