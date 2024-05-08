@@ -15,8 +15,8 @@ const Sidebar = ({ mqttClient }) => {
       ...incidents,
       {
         location: violation.location,
-        title: violation.location,
-        description: violation.location,
+        title: violation.title,
+        // description: violation.title,
         img: `data:image/jpeg;base64,${violation.thumbnail}`,
         time: new Date(violation.ts).toLocaleTimeString(),
       },

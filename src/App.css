@@ -21,8 +21,9 @@
 
 .feed-wrapper {
     width: 33%;
-    margin-right: 3px;
-    min-height: 200px
+    /* margin-right: 3px; */
+    min-height: 200px;
+    height: 300px;
 }
 
 .main-title {

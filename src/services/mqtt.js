@@ -20,7 +20,7 @@ export function useMQTTSubscribe(client, topic, onMessage) {
             if (client.connected) {
                 clearInterval(i);
 
-                // console.log("Now Subscribing", topic);
+                console.log("Now Subscribing", topic);
                 client.subscribe(topic);
                 client.on("message", handleMsg);
             }

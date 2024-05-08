@@ -4,6 +4,7 @@
     background-color: #f0f0f0;
     border-right: 1px solid #ccc;
     overflow: auto;
+    scrollbar-width: thin
 }
 
 .sidebar-content {

@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
+import { MenuItem, Select } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -19,16 +20,13 @@ const style = {
 };
 
 export default function AddCamModal({ open, handleClose, sendDataToParent }) {
-  const [formData, setFormData] = React.useState({ topic: "", location: "" });
-
-  //   React.useEffect(() => {
-  //     // console.log(formData);
-  //   }, [formData]);
+  const [formData, setFormData] = React.useState({
+    topic: "none",
+    location: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log({name, value})
-    // {topic:"" ,location:""}
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -36,13 +34,12 @@ export default function AddCamModal({ open, handleClose, sendDataToParent }) {
   };
 
   const addOnclick = () => {
-    if(!formData.topic || !formData.location){
-        return
+    if (!formData.topic || formData.topic ==="none" || !formData.location) {
+      return;
     }
 
     sendDataToParent(formData);
     setFormData({ topic: "", location: "" });
-    // console.log(formData);
   };
 
   return (
@@ -66,14 +63,25 @@ export default function AddCamModal({ open, handleClose, sendDataToParent }) {
               </Typography>
             </Grid>
             <Grid item md={6}>
-              <TextField
+              <Select
+                style={{ width: "100%" }}
                 id="topic"
                 name="topic"
                 label="Topic"
                 variant="filled"
-                value={formData.topic}
+                value={formData.topic ?? ""}
                 onChange={handleChange}
-              />
+                renderInput={(params) => (
+                  <TextField {...params} label="Filter" />
+                )}
+              >
+                <MenuItem 
+                value={"none"} selected disabled  >
+                  Select Topic
+                </MenuItem>
+                <MenuItem value={"Zone_1"}>PPE_detection</MenuItem>
+                <MenuItem value={"Zone_3"}>Fire_detection</MenuItem>
+              </Select>
             </Grid>
             <Grid item md={6}>
               <TextField
@@ -96,3 +104,8 @@ export default function AddCamModal({ open, handleClose, sendDataToParent }) {
     </div>
   );
 }
+
+const Zoneslist = [
+  { title: "PPE_detection", mqtt_topic: "Zone_1" },
+  { title: "Fire_detection", mqtt_topic: "Zone_2" },
+];

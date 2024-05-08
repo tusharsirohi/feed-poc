@@ -13,6 +13,7 @@ const App = () => {
   const [zones, setZones] = React.useState([
     { topic: "Zone_1", location: "Location 1" },
     { topic: "Zone_2", location: "Location 2" },
+    { topic: "Zone_3", location: "Location 3" },
   ]);
 
   const [selectedZone, setSelectedZone] = React.useState(null);
@@ -30,9 +31,6 @@ const App = () => {
     addZone(zone);
     handleClose();
 
-    // TODO: Get topic from modal textbox
-    // TODO: Get location from modal textbox
-    // TODO: Call addZone({ topic: topic, location: location });
   }
 
   const addZone = (zone) => {
