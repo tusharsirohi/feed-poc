@@ -1,12 +1,18 @@
 .sidebar {
     width: 25%;
-    height: 100vh;
+    height: 100%;
     background-color: #f0f0f0;
     border-right: 1px solid #ccc;
-    overflow: auto;
+    border: 1px solid black;
+    /* overflow: auto; */
     scrollbar-width: thin
+
 }
 
 .sidebar-content {
-    padding: 10px;
+    
+    height: 96dvh;
+    min-height: 95.5dvh;
+    overflow-y: scroll;
+    padding-bottom: 10px;
 }
