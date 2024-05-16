@@ -6,20 +6,27 @@ import { getMQTTClient } from "./services/mqtt";
 import ZoneDisplay from "./components/ZoneDisplay";
 import AddCamModal from "./components/AddCamModal";
 import UpdateCam from "./components/UpdateCam";
-import { Button, Grid ,Typography} from "@mui/material";
+import { Grid ,Typography} from "@mui/material";
 import Clock from'./components/Clock';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Vortex,DNA } from 'react-loader-spinner';
+import { Button, Segment } from 'semantic-ui-react';
+import gif from './wired-gradient-62-film.gif'; 
+import gif1 from './wired-gradient-63-home.gif'; 
+import gif2 from './tenor.gif'
+import gif3 from './wired-gradient-678-fireman.gif'
 
 
 const App = () => {
   const [mqttClient, setMqttClient] = React.useState();
   const [zones, setZones] = React.useState([
-    { topic: "Zone_1", location: "Location 1" },
-    { topic: "Zone_2", location: "Location 2" },
-    { topic: "Zone_3", location: "Location 3" },
+    { topic: "Zone_1", location: "Construction Site 1" },
+    { topic: "Zone_2", location: "Forest Fire" },
+    { topic: "Zone_3", location: "Construction Site 2" },
+    { topic: "Zone_4", location: "Construction Site 3" },
+    { topic: "Zone_5", location: "Construction Site 4" }
   ]);
   const [loading, setLoading] = React.useState(false);
 
@@ -65,15 +72,15 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    const client = getMQTTClient({ host: "ws://localhost:9500" });
+    const client = getMQTTClient({ host: "ws://172.20.30.107:9500" });
     setMqttClient(client);
   }, []);
 
   const handleButtonClick = async () => {
-    toast.info('Request successful');
+    toast.info('Request Send!');
     setLoading(true); 
     try {
-      const response = await fetch('http://localhost:8000/all');
+      const response = await fetch('http://172.20.30.107:8000/all');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -90,46 +97,40 @@ const App = () => {
 
   return (
     <div style={{ display: 'flex'}}>
-      <header style={{ backgroundColor: '#FFFFF', color: 'white', padding: '1px 1px', textAlign: 'center' ,borderRight: '2px solid black',borderTop: '2px solid black'}}>
-      <img src='https://ispoc.impressicocrm.com/images/ibs-logo-big.png' alt="Logo" style={{ height: '80px', marginRight: '0px',marginTop: '10px' }} />
-            <Typography variant="h6" style ={{marginTop: '10px',color: 'black', fontFamily: "fantasy"}}>COMPUTER VISION</Typography>
-            <div style={{ display: 'flex', gap: '10px',marginTop: '10px' }}>
-          <Link to="/" style={{ color: 'inherit', textDecoration: 'none', fontSize: '28px' ,marginLeft: '3px '}}>🪟</Link> {/* Window */}
-          <Link to="/fire" style={{ color: 'inherit', textDecoration: 'none' , fontSize: '28px'}}>🔥</Link> {/* Fire */}
-          <Link to="/ppe" style={{ color: 'inherit', textDecoration: 'none' , fontSize: '28px'}}>🦺</Link> {/* Safety */}
+      <header style={{ backgroundColor: '#FFFFF', color: 'white', padding: '1px 1px', textAlign: 'center', borderRight: '1px solid black', borderTop: '1px solid black',width:'10dvw'}}>
+        <img src='https://ispoc.impressicocrm.com/images/ibs-logo-big.png' alt="Logo" style={{ height: '80px', marginRight: '0px', marginTop: '10px' }} />
+        <Typography variant="h5" className="typography-effect">COMPUTER VISION</Typography>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <img
+              src={gif1}
+              alt="loading gif"
+              style={{ width: '35px', height: '35px', cursor: 'pointer' }}
+            />
+          </Link>
+          <Link to="/fire" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <img
+              src={gif2}
+              alt="loading gif"
+              style={{ width: '35px', height: '35px', cursor: 'pointer' }}
+            />
+            </Link> 
+          <Link to="/ppe" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <img
+              src={gif3}
+              alt="loading gif"
+              style={{ width: '35px', height: '35px', cursor: 'pointer' }}
+            />
+          </Link>
         </div>
-          </header>
-          {loading && (
-      <DNA
-      visible={true}
-      height="100"
-      width="100"
-      ariaLabel="dna-loading"
-      wrapperStyle={{}}
-      wrapperClass="fixed-spinner "
-      />
-    )}
-      <Grid container className="feed-container">
-        {zones.map((zone, k) => (
-          <Grid item md={4} key={k} className="feed-wrapper">
-            <div className="main-title">
-              {" "}
-              {zone.location}
-              <div className="feed-menu">
-                <Button onClick={() => DeleteCamera(zone.topic)}>Delete</Button>
-                <Button onClick={() => handleUpdateClick(zone)}>Update</Button>
-              </div>
-            </div>
-            <ZoneDisplay mqttClient={mqttClient} mqttTopic={zone.topic} />
-            <Clock />
-            <style>
+        <style>
         {`
           .fixed-spinner {
-            position: fixed;
-            top: 50%;
-            left: 5%;
+            position: relative;
+            top: 10%;
+            left: 37%;
             transform: translate(-50%, -50%);
-            z-index: 1000;
+            z-index: 1;
           }
           @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
@@ -143,25 +144,56 @@ const App = () => {
             }
           }
           .bounce {
-            animation: bounce 10s infinite;
+            animation: bounce 5s infinite;
           }
         `}
       </style>
-            <button
-            style={{
-              position: 'absolute',
-              left: '40px',
-              bottom: '50px',
-              backgroundColor: 'transparent',
-              border: 'none',
-              fontSize: '32px',
-              cursor: 'pointer',
-              animation: 'bounce 10s infinite'
-            }}
-            onClick={handleButtonClick}
-          >
-            ▶️
-          </button>
+        {loading && (
+        <DNA
+          visible={true}
+          height="100"
+          width="100"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="fixed-spinner"
+        />
+      )}
+      <div style={{ position: 'aboslute', top:'60%',justifyContent: 'center', alignItems: 'center'}}>
+      
+      <Segment inverted>
+            <img
+              src={gif}
+              alt="loading gif"
+              style={{
+                position: 'absolute',
+                top: '85%',
+                left: '3%',
+                width: '50px',
+                height: '50px',
+                cursor: 'pointer',
+                animation: 'bounce 5s infinite'
+              }}
+              onClick={handleButtonClick}
+            />
+          </Segment>
+            
+              <Clock />
+            </div>
+      </header>
+      <Grid container className="feed-container">
+        {zones.map((zone, k) => (
+          <Grid item md={4} key={k} className="feed-wrapper">
+            <div className="main-title">
+              {zone.location}
+              <div className="feed-menu">
+                <Button onClick={() => DeleteCamera(zone.topic)}>Delete</Button>
+                <Button onClick={() => handleUpdateClick(zone)}>Update</Button>
+              </div>
+            </div>
+            <ZoneDisplay mqttClient={mqttClient} mqttTopic={zone.topic} />
+            <div style={{ position: 'relative' }}>
+              <Clock />
+            </div>
           </Grid>
         ))}
         <Grid
@@ -193,7 +225,7 @@ const App = () => {
       />
       <Sidebar mqttClient={mqttClient} />
     </div>
-    
   );
 };
+
 export default App;

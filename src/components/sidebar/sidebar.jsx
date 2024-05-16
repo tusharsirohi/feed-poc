@@ -18,7 +18,7 @@ const Sidebar = ({ mqttClient, zoneTopic }) => {
       return;
     }
 
-    // console.log("Received violation:", violation);
+    console.log("Received violation:", violation);
 
     if (!zoneTopic || violation.location === zoneTopic) {
       setIncidents((prevIncidents) => [

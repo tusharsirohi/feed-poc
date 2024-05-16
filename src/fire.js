@@ -8,13 +8,18 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Vortex , DNA} from 'react-loader-spinner';
+import { Button, Segment } from 'semantic-ui-react'
+import gif from './wired-gradient-62-film.gif'; 
+import gif1 from './wired-gradient-63-home.gif'; 
+import gif2 from './tenor.gif'
+import gif3 from './wired-gradient-678-fireman.gif'
 
 const Fire = () => {
     const [mqttClient, setMqttClient] = useState(null);
     const [loading, setLoading] = React.useState(false);
 
     useEffect(() => {
-      const client = getMQTTClient({ host: 'ws://localhost:9500' });
+      const client = getMQTTClient({ host: 'ws://172.20.30.107:9500' });
       setMqttClient(client);
   
       return () => {
@@ -25,10 +30,10 @@ const Fire = () => {
     }, []);
 
     const handleButtonClick = async () => {
-      toast.info('Request successful');
+      toast.info('Request Send!');
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:8000/fire');
+        const response = await fetch('http://172.20.30.107:8000/fire');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -60,9 +65,27 @@ const Fire = () => {
           <img src='https://ispoc.impressicocrm.com/images/ibs-logo-big.png' alt="Logo" style={{ height: '70px', marginRight: '10px' }} />
             <Typography variant="h4" style={{ margin: 0, flexGrow: 1, textAlign: 'center',color: 'black' }}>Fire Detection 🔥</Typography>
             <div style={{ display: 'flex', gap: '10px' }}>
-          <Link to="/" style={{ color: 'inherit', textDecoration: 'none',fontSize: '28px' }}>🪟</Link> {/* Window */}
-          <Link to="/fire" style={{ color: 'inherit', textDecoration: 'none',fontSize: '28px' }}>🔥</Link> {/* Fire */}
-          <Link to="/ppe" style={{ color: 'inherit', textDecoration: 'none',fontSize: '28px' }}>🦺</Link> {/* Safety */}
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <img
+              src={gif1}
+              alt="loading gif"
+              style={{ width: '45px', height: '45px', cursor: 'pointer' }}
+            />
+          </Link>
+          <Link to="/fire" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <img
+              src={gif2}
+              alt="loading gif"
+              style={{ width: '45px', height: '45px', cursor: 'pointer' }}
+            />
+            </Link> 
+          <Link to="/ppe" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <img
+              src={gif3}
+              alt="loading gif"
+              style={{ width: '45px', height: '45px', cursor: 'pointer' }}
+            />
+          </Link>
         </div>
           </header>
           {loading && (
@@ -100,25 +123,24 @@ const Fire = () => {
             }
           }
           .bounce {
-            animation: bounce 10s infinite;
+            animation: bounce 5s infinite;
           }
         `}
       </style>
-              <button
-            style={{
-              position: 'absolute',
-              left: '40px',
-              bottom: '50px',
-              backgroundColor: 'transparent',
-              border: 'none',
-              fontSize: '32px',
-              cursor: 'pointer',
-              animation: 'bounce 10s infinite'
-            }}
-            onClick={handleButtonClick}
-          >
-            ▶️
-          </button>
+      <img
+              src={gif}
+              alt="loading gif"
+              style={{
+                position: 'absolute',
+                top: '85%',
+                left: '4%',
+                width: '50px',
+                height: '50px',
+                cursor: 'pointer',
+                animation: 'bounce 5s infinite'
+              }}
+              onClick={handleButtonClick}
+            />
         </div>
             <Sidebar mqttClient={mqttClient} zoneTopic="Zone_2" />
           </div>

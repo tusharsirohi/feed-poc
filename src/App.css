@@ -4,6 +4,7 @@
     /* Adjust the number of columns as needed */
     gap: 10px;
     /* Adjust the gap between items */
+    border: 1px solid black;
 }
 
 .grid-item img {
@@ -24,6 +25,7 @@
     /* margin-right: 3px; */
     min-height: 200px;
     height: 300px;
+    border: 1px solid black;
 }
 
 .main-title {
@@ -35,3 +37,33 @@
     margin: -2%;
     cursor: progress;
 }
+@keyframes shine {
+    0% {
+      background-position: 0;
+    }
+    60% {
+      background-position: 600px;
+    }
+    100% {
+      background-position: 600px;
+    }
+  }
+  
+  .typography-effect {
+    color: hsl(0, 0%, 28%);
+    /* padding-top: 100px; */
+    top: 0px;
+    margin-top: 30px;
+    font-size: 12px !important;
+    font-weight: bolder !important;
+    font-family: fantasy;
+    letter-spacing: 5px !important;
+    cursor: pointer;
+    /* text-transform: uppercase; */
+    padding: 10px;
+    background: linear-gradient(to right, hsl(0, 0%, 30%) 0, hsl(0, 0%, 100%) 10%, hsl(0, 0%, 30%) 20%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 15s infinite linear;
+  }
+  

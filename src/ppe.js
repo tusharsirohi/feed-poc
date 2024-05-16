@@ -8,13 +8,18 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Vortex ,DNA} from 'react-loader-spinner';
+import { Button, Segment } from 'semantic-ui-react'
+import gif from './wired-gradient-62-film.gif'; 
+import gif1 from './wired-gradient-63-home.gif'; 
+import gif2 from './tenor.gif'
+import gif3 from './wired-gradient-678-fireman.gif'
 
 const Ppe = () => {
   const [mqttClient, setMqttClient] = useState(null);
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
-    const client = getMQTTClient({ host: 'ws://localhost:9500' });
+    const client = getMQTTClient({ host: 'ws://172.20.30.107:9500' });
     setMqttClient(client);
 
     return () => {
@@ -25,10 +30,10 @@ const Ppe = () => {
   }, []);
 
   const handleButtonClick = async () => {
-    toast.info('Request successful');
+    toast.info('Request Send!');
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/ppe');
+      const response = await fetch('http://172.20.30.107:8000/ppe');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -65,14 +70,26 @@ const Ppe = () => {
           PPE Detection 🦺
         </Typography>
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Link to='/' style={{ color: 'inherit', textDecoration: 'none', fontSize: '28px' }}>
-            🪟
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <img
+              src={gif1}
+              alt="loading gif"
+              style={{ width: '45px', height: '45px', cursor: 'pointer' }}
+            />
           </Link>
-          <Link to='/fire' style={{ color: 'inherit', textDecoration: 'none', fontSize: '28px' }}>
-            🔥
-          </Link>
-          <Link to='/ppe' style={{ color: 'inherit', textDecoration: 'none', fontSize: '28px' }}>
-            🦺
+          <Link to="/fire" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <img
+              src={gif2}
+              alt="loading gif"
+              style={{ width: '45px', height: '45px', cursor: 'pointer' }}
+            />
+            </Link> 
+          <Link to="/ppe" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <img
+              src={gif3}
+              alt="loading gif"
+              style={{ width: '45px', height: '45px', cursor: 'pointer' }}
+            />
           </Link>
         </div>
       </header>
@@ -88,7 +105,7 @@ const Ppe = () => {
     )}
       <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
         <div style={{ flex: 3, padding: '4px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', position: 'relative' }}>
-          {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_1" />}
+          {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_4" />}
           <Clock />
           <style>
         {`
@@ -111,28 +128,26 @@ const Ppe = () => {
             }
           }
           .bounce {
-            animation: bounce 10s infinite;
+            animation: bounce 5s infinite;
           }
         `}
       </style>
-          <button
-            style={{
-              position: 'absolute',
-              left: '40px',
-              bottom: '50px',
-              backgroundColor: 'transparent',
-              border: 'none',
-              fontSize: '32px',
-              cursor: 'pointer',
-              animation: 'bounce 10s infinite',
-              
-            }}
-            onClick={handleButtonClick}
-          >
-            ▶️
-          </button>
+      <img
+              src={gif}
+              alt="loading gif"
+              style={{
+                position: 'absolute',
+                top: '85%',
+                left: '4%',
+                width: '50px',
+                height: '50px',
+                cursor: 'pointer',
+                animation: 'bounce 5s infinite'
+              }}
+              onClick={handleButtonClick}
+            />
         </div>
-        <Sidebar mqttClient={mqttClient} zoneTopic='Zone_1' />
+        <Sidebar mqttClient={mqttClient} zoneTopic='Zone_4' />
       </div>
       <ToastContainer />
     </div>

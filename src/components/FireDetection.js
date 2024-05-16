@@ -5,7 +5,7 @@ import { Grid, Typography } from '@mui/material';
 
 const FireDetection = () => {
   const mqttClient = React.useEffect(() => {
-    const client = getMQTTClient({ host: 'ws://localhost:9500' });
+    const client = getMQTTClient({ host: 'ws://172.20.30.107:9500' });
     return client;
   }, []);
 

@@ -12,8 +12,8 @@ const Clock = () => {
   }, []);
 
   return (
-    <div style={{ position: 'absolute', bottom: 10, left: 20, color: 'white', fontSize: '20px', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '5px', borderRadius: '5px' }}>
-      {time.toLocaleTimeString()}
+    <div style={{ position: 'absolute', bottom: 10, left: 20, color: 'white', fontSize: '18px', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '5px', borderRadius: '5px' }}>
+      {time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
     </div>
   );
 };
