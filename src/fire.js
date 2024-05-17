@@ -100,7 +100,7 @@ const Fire = () => {
     )}
           <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
         <div style={{ flex: 3, padding: '4px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', position: 'relative' }}>
-              {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_2" />}
+              {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_1" />}
               <Clock />
               <style>
         {`
@@ -142,7 +142,7 @@ const Fire = () => {
               onClick={handleButtonClick}
             />
         </div>
-            <Sidebar mqttClient={mqttClient} zoneTopic="Zone_2" />
+            <Sidebar mqttClient={mqttClient} zoneTopic="Zone_1" />
           </div>
           <ToastContainer />
         </div>

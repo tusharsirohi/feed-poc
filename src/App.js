@@ -22,8 +22,8 @@ import gif3 from './wired-gradient-678-fireman.gif'
 const App = () => {
   const [mqttClient, setMqttClient] = React.useState();
   const [zones, setZones] = React.useState([
-    { topic: "Zone_1", location: "Construction Site 1" },
-    { topic: "Zone_2", location: "Forest Fire" },
+    { topic: "Zone_1", location: "Forest Fire" },
+    { topic: "Zone_2", location: "Construction Site 1" },
     { topic: "Zone_3", location: "Construction Site 2" },
     { topic: "Zone_4", location: "Construction Site 3" },
     { topic: "Zone_5", location: "Construction Site 4" }
