@@ -138,11 +138,11 @@ const Ppe = () => {
               style={{
                 position: 'absolute',
                 top: '85%',
-                left: '4%',
+                left: '2%',
                 width: '50px',
                 height: '50px',
                 cursor: 'pointer',
-                animation: 'bounce 5s infinite'
+                animation: 'bounce 10s infinite'
               }}
               onClick={handleButtonClick}
             />

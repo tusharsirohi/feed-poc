@@ -171,7 +171,7 @@ const App = () => {
                 width: '50px',
                 height: '50px',
                 cursor: 'pointer',
-                animation: 'bounce 5s infinite'
+                animation: 'bounce 10s infinite'
               }}
               onClick={handleButtonClick}
             />
