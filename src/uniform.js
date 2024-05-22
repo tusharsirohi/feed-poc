@@ -11,14 +11,12 @@ import { Vortex ,DNA} from 'react-loader-spinner';
 import { Button, Segment } from 'semantic-ui-react'
 import gif from './wired-gradient-62-film.gif'; 
 import gif1 from './wired-gradient-63-home.gif'; 
-import gif2 from './tenor.gif'
-import gif3 from './wired-gradient-678-fireman.gif'
+import gif2 from './tenor.gif';
+import gif3 from './wired-gradient-678-fireman.gif';
 
-const Ppe = () => {
+const Uniform = () => {
   const [mqttClient, setMqttClient] = useState(null);
   const [loading, setLoading] = React.useState(false);
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
 
   useEffect(() => {
     const client = getMQTTClient({ host: 'ws://172.20.30.107:9500' });
@@ -34,21 +32,17 @@ const Ppe = () => {
   const handleButtonClick = async () => {
     toast.info('Request Send!');
     setLoading(true);
-    setStartTime(new Date().toLocaleString());
-    setEndTime(null);
     try {
-      const response = await fetch('http://172.20.30.107:8000/ppe');
+      const response = await fetch('http://172.20.30.107:8000/uniform');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
       console.log(data);
       toast.success('Process complete 😎');
-      setEndTime(new Date().toLocaleString());
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error('Error fetching data');
-      setEndTime(new Date().toLocaleString());
     }finally {
       setLoading(false); 
     }
@@ -73,7 +67,7 @@ const Ppe = () => {
           style={{ height: '70px', marginRight: '10px' }}
         />
         <Typography variant='h4' style={{ margin: 0, flexGrow: 1, textAlign: 'center', color: 'black' }}>
-          PPE Detection 🦺
+          UNIFORM DETECTION 👕
         </Typography>
         <div style={{ display: 'flex', gap: '10px' }}>
         <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
@@ -111,12 +105,8 @@ const Ppe = () => {
     )}
       <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
         <div style={{ flex: 3, padding: '4px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', position: 'relative' }}>
-          {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_4" />}
+          {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_10" />}
           <Clock />
-          <div style={{ position: 'absolute', top: '0%', left: '0%', zIndex: 1000, backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
-            {startTime && <Typography variant='body1'>Start Time: {startTime}</Typography>}
-            {endTime && <Typography variant='body1'>End Time: {endTime}</Typography>}
-          </div>
           <style>
         {`
           .fixed-spinner {
@@ -157,11 +147,11 @@ const Ppe = () => {
               onClick={handleButtonClick}
             />
         </div>
-        <Sidebar mqttClient={mqttClient} zoneTopic='Zone_4' />
+        <Sidebar mqttClient={mqttClient} zoneTopic='Zone_10' />
       </div>
       <ToastContainer />
     </div>
   );
 };
 
-export default Ppe;
+export default Uniform;

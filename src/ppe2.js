@@ -2,77 +2,81 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './components/sidebar/sidebar';
 import ZoneDisplay from './components/ZoneDisplay';
 import { Typography } from '@mui/material';
-import { getMQTTClient} from "./services/mqtt";
-import Clock from'./components/Clock';
+import { getMQTTClient } from "./services/mqtt";
+import Clock from './components/Clock';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Vortex , DNA} from 'react-loader-spinner';
+import { Vortex ,DNA} from 'react-loader-spinner';
 import { Button, Segment } from 'semantic-ui-react'
 import gif from './wired-gradient-62-film.gif'; 
 import gif1 from './wired-gradient-63-home.gif'; 
 import gif2 from './tenor.gif'
 import gif3 from './wired-gradient-678-fireman.gif'
 
-const Fire = () => {
-    const [mqttClient, setMqttClient] = useState(null);
-    const [loading, setLoading] = React.useState(false);
-    const [startTime, setStartTime] = useState(null);
-    const [endTime, setEndTime] = useState(null);
+const Ppe2 = () => {
+  const [mqttClient, setMqttClient] = useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
-    useEffect(() => {
-      const client = getMQTTClient({ host: 'ws://172.20.30.107:9500' });
-      setMqttClient(client);
-  
-      return () => {
-        if (client) {
-          client.end(true); 
-        }
-      };
-    }, []);
+  useEffect(() => {
+    const client = getMQTTClient({ host: 'ws://172.20.30.107:9500' });
+    setMqttClient(client);
 
-    const handleButtonClick = async () => {
-      toast.info('Request Send!');
-      setLoading(true);
-      setStartTime(new Date().toLocaleString());
-      setEndTime(null);
-
-      try {
-        const response = await fetch('http://172.20.30.107:8000/fire');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        toast.success('Process complete 😎');
-        setEndTime(new Date().toLocaleString());
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        toast.error('Error fetching data');
-        setEndTime(new Date().toLocaleString());
-      }finally {
-        setLoading(false); 
+    return () => {
+      if (client) {
+        client.end(true); 
       }
     };
-  
+  }, []);
 
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-          <header
-            style={{
-              backgroundColor: '#FFFFF',
-              color: 'white',
-              padding: '10px 20px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderBottom: '2px solid black'
-            }}
-          >
-          <img src='https://ispoc.impressicocrm.com/images/ibs-logo-big.png' alt="Logo" style={{ height: '70px', marginRight: '10px' }} />
-            <Typography variant="h4" style={{ margin: 0, flexGrow: 1, textAlign: 'center',color: 'black' }}>Fire Detection 🔥</Typography>
-            <div style={{ display: 'flex', gap: '10px' }}>
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+  const handleButtonClick = async () => {
+    toast.info('Request Send!');
+    setLoading(true);
+    setStartTime(new Date().toLocaleString());
+    setEndTime(null);
+    try {
+      const response = await fetch('http://172.20.30.107:8000/ppe2');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      toast.success('Process complete 😎');
+      setEndTime(new Date().toLocaleString());
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      toast.error('Error fetching data');
+      setEndTime(new Date().toLocaleString());
+    }finally {
+      setLoading(false); 
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+      <header
+        style={{
+          backgroundColor: '#FFFFFF',
+          color: 'white',
+          padding: '10px 20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '2px solid black'
+        }}
+      >
+        <img
+          src='https://ispoc.impressicocrm.com/images/ibs-logo-big.png'
+          alt='Logo'
+          style={{ height: '70px', marginRight: '10px' }}
+        />
+        <Typography variant='h4' style={{ margin: 0, flexGrow: 1, textAlign: 'center', color: 'black' }}>
+          PPE Detection 🦺
+        </Typography>
+        <div style={{ display: 'flex', gap: '10px' }}>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
             <img
               src={gif1}
               alt="loading gif"
@@ -94,8 +98,8 @@ const Fire = () => {
             />
           </Link>
         </div>
-          </header>
-          {loading && (
+      </header>
+      {loading && (
       <DNA
       visible={true}
       height="100"
@@ -105,15 +109,15 @@ const Fire = () => {
       wrapperClass="fixed-spinner "
       />
     )}
-          <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
+      <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
         <div style={{ flex: 3, padding: '4px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', position: 'relative' }}>
-              {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_1" />}
-              <Clock />
-              <div style={{ position: 'absolute', top: '0%', left: '0%', zIndex: 1000, backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
+          {mqttClient && <ZoneDisplay mqttClient={mqttClient} mqttTopic="Zone_4" />}
+          <Clock />
+          <div style={{ position: 'absolute', top: '0%', left: '0%', zIndex: 1000, backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
             {startTime && <Typography variant='body1'>Start Time: {startTime}</Typography>}
             {endTime && <Typography variant='body1'>End Time: {endTime}</Typography>}
           </div>
-              <style>
+          <style>
         {`
           .fixed-spinner {
             position: fixed;
@@ -153,11 +157,11 @@ const Fire = () => {
               onClick={handleButtonClick}
             />
         </div>
-            <Sidebar mqttClient={mqttClient} zoneTopic="Zone_1" />
-          </div>
-          <ToastContainer />
-        </div>
-      );
-    };
+        <Sidebar mqttClient={mqttClient} zoneTopic='Zone_4' />
+      </div>
+      <ToastContainer />
+    </div>
+  );
+};
 
-export default Fire;
+export default Ppe2;

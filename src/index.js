@@ -5,6 +5,8 @@ import './index.css';
 import App from './App';
 import Fire from './fire';
 import Ppe from './ppe';
+import Ppe2 from './ppe2';
+import Uniform from './uniform';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +17,8 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/fire" element={<Fire />} />
       <Route path="/ppe" element={<Ppe />} />
+      <Route path="/ppe2" element={<Ppe2 />} />
+      <Route path="/uniform" element={<Uniform />} />
     </Routes>
   </Router>
 </React.StrictMode>

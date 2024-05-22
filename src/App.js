@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 // import Webcam from "react-webcam";
 import Sidebar from "./components/sidebar/sidebar";
 import "./App.css";
@@ -29,6 +29,8 @@ const App = () => {
     { topic: "Zone_5", location: "Construction Site 4" }
   ]);
   const [loading, setLoading] = React.useState(false);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
 
   const [selectedZone, setSelectedZone] = React.useState(null);
@@ -79,6 +81,8 @@ const App = () => {
   const handleButtonClick = async () => {
     toast.info('Request Send!');
     setLoading(true); 
+    setStartTime(new Date().toLocaleString());
+    setEndTime(null);
     try {
       const response = await fetch('http://172.20.30.107:8000/all');
       if (!response.ok) {
@@ -87,9 +91,11 @@ const App = () => {
       const data = await response.json();
       console.log(data);
       toast.success('Process complete 😎');
+      setEndTime(new Date().toLocaleString());
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error('Error fetching data');
+      setEndTime(new Date().toLocaleString());
     } finally{
       setLoading(false);
     }
@@ -178,6 +184,10 @@ const App = () => {
           </Segment>
             
               <Clock />
+              <div style={{ position: 'absolute', top: '88%', left: '60%', zIndex: 1000, backgroundColor: 'black', padding: '10px', borderRadius: '5px' }}>
+            {startTime && <Typography variant='body1'>Start Time: {startTime}</Typography>}
+            {endTime && <Typography variant='body1'>End Time: {endTime}</Typography>}
+          </div>
             </div>
       </header>
       <Grid container className="feed-container">
